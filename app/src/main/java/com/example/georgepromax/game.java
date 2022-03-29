@@ -36,20 +36,20 @@ public class game extends AppCompatActivity implements View.OnClickListener {
     private int[] arr = utility.randomArr(1, 15); // מערך מספרים אקראיים בתחום
     private Stack<Integer> stackUndo=new Stack<>(); // מחסנית לשמירה וביטול פעולות
 
-    private String thePlayer,gameTimeBest;
-    private PlayerModel playerModel=new PlayerModel();
+    private String thePlayer,gameTimeBest; // שם השחקן והשיא שלו
+    private PlayerModel playerModel=new PlayerModel(); // מודל השחקן
 
 
-    private Button btnLeaderboard;
+    private Button btnLeaderboard; // כפתור מעבר לטבלת השיאים
 
-    private String[] dbName;
-    private int index=0;
-    private String temporary;
+    private String[] dbName; // מערך שמות משתמשים מהמסד
+    private int index=0; // משתנה עזר
+    private String temporary; // משתנה עזר
 
-    private CountDownTimer countDownTimer;
-    private int counter = 0;
-    private long maxTime = 600000;
-    private boolean isRunning = false;
+    private CountDownTimer countDownTimer; // טיימר
+    private int counter = 0; // ספירה
+    private long maxTime = 600000; // הגבלת זמן
+    private boolean isRunning = false; // האם הזמן רץ
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,33 +61,33 @@ public class game extends AppCompatActivity implements View.OnClickListener {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.twoFour) {
-            setGameGrid(0);
-            resetCounter();
-            buttonColor24();
-            emptyMyStack();
+        if (itemId == R.id.twoFour) { //אם 2 על 4
+            setGameGrid(0); // מייצג לוח של 2 על 4
+            resetCounter(); // איפוס טיימר
+            buttonColor24(); // אם המספר במקום הנכון הוא נצבע בירוק
+            emptyMyStack(); // לנקות את המחסנית לחזרה אחורה
         }
         if (itemId == R.id.three) {
-            setGameGrid(1);
-            resetCounter();
-            buttonColor33();
-            emptyMyStack();
+            setGameGrid(1); // מייצג לוח של 3 על 3
+            resetCounter(); // איפוס טיימר
+            buttonColor33(); // אם המספר במקום הנכון הוא נצבע בירוק
+            emptyMyStack(); // לנקות את המחסנית לחזרה אחורה
         }
         if (itemId == R.id.four) {
-            setGameGrid(2);
-            resetCounter();
-            buttonColor44();
-            emptyMyStack();
+            setGameGrid(2); // מייצג לוח של 4 על 4
+            resetCounter(); // איפוס טיימר
+            buttonColor44(); // אם המספר במקום הנכון הוא נצבע בירוק
+            emptyMyStack(); // לנקות את המחסנית לחזרה אחורה
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void resetCounter() {
-        if (counter != 0)
-            countDownTimer.cancel();
-        counter = 0;
-        isRunning = false;
-        CountDown.setText("" + counter);
+        if (counter != 0) // אם הספירה לא 0
+            countDownTimer.cancel(); // עוצרים את הספירה
+        counter = 0; // מאפסים את הספירה
+        isRunning = false; // טיימר לא רץ
+        CountDown.setText("" + counter); // מאפסים את הטקסט
     }
 
 
@@ -96,14 +96,14 @@ public class game extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        init();
+        init(); // תוכן
     }
 
     private void myTimer() {
-        if (!isRunning) {
-            countDownTimer = new CountDownTimer(600000, 1000) {
+        if (!isRunning) { // אם הטיימר לא רץ
+            countDownTimer = new CountDownTimer(600000, 1000) { // יוצרים טיימר חדש
                 @Override
-                public void onTick(long l) {
+                public void onTick(long l) { // כל ספירה
                     CountDown.setText("" + counter);
                     counter++;
                 }
@@ -111,9 +111,9 @@ public class game extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onFinish() {
                     CountDown.setText("Game Over");
-                }
+                } // הגבלת הזמן
             }.start();
-            isRunning = true;
+            isRunning = true; // הטימר התחיל לרוץ
         }
     }
 
