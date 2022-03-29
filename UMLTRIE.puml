@@ -1,0 +1,242 @@
+@startuml
+class com.example.georgepromax.navigation {
+- ImageButton arrangeGameBtn
+- String thePlayer
+# void onCreate(Bundle)
++ void init()
++ void onClick(View)
+}
+class com.example.georgepromax.UserViewData {
+- ImageView showUserImage
+- TextView showUserName
+- Button btnGoBack
+# void onCreate(Bundle)
++ void init()
++ void onClick(View)
+}
+class com.example.georgepromax.PlayerModel {
+~ String userName
++ String getGameTimeBest()
++ void setGameTimeBest(String)
++ String getUserName()
++ void setUserName(String)
++ String getPassword()
++ void setPassword(String)
++ String getEmail()
++ void setEmail(String)
++ String getPhoneNumber()
++ void setPhoneNumber(String)
+}
+class com.example.georgepromax.fourInAline {
+- TextView txtFourTitle
+- ImageView[] btn
+- int turns
+- ImageView[][] grid
+- int[][] gridMone
+# void onCreate(Bundle)
++ void init()
+- void fvbid()
++ void onClick(View)
+- void checkWinner()
+- void winMessage(int)
+}
+class com.example.georgepromax.MasterP {
+- ListView listView
+- ClassItem classItem
+~ ArrayList<ClassItem> list
+- int[] imid
+- String[] userArr
+- String[] passwordArr
+~ AdapterItems adapterItems
+# void onCreate(Bundle)
++ void init()
++ void onItemClick(AdapterView<?>,View,int,long)
++ void alert(ArrayList<ClassItem>,int)
+}
+class com.example.georgepromax.DataBaseHelper {
+- {static} String PLAYER_TABLE
+- {static} String COLUMN_PLAYER_NAME
+- {static} String COLUMN_PLAYER_PASSWORD
+- {static} String COLUMN_PLAYER_PHONE
+- {static} String COLUMN_PLAYER_EMAIL
+- {static} String COLUMN_ID
++ String getPlayerTable()
++ String getColumnPlayerName()
++ String getColumnPlayerPassword()
++ String getColumnPlayerPhone()
++ String getColumnPlayerEmail()
++ String getColumnId()
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ boolean addOne(PlayerModel)
+}
+class com.example.georgepromax.ClassItem {
+- String userName
+- int imgItem
++ String getUserName()
++ void setUserName(String)
++ String getPassword()
++ void setPassword(String)
++ int getImgItem()
++ void setImgItem(int)
+}
+class com.example.georgepromax.WordGame {
+- TextView wordGameTitle
+- EditText txtUserWord
+- ImageButton sendWord
+- ImageButton info
+- Button[] btnArr
+- int[] counter
+~ Utility utility
+- String[] words
+- String theWord
+# void onCreate(Bundle)
++ void init()
++ void onClick(View)
++ void userMarkLetters(View)
+}
+class com.example.georgepromax.game {
+- TextView GameTitle
+- TextView CountDown
+- Button[] btnArr
+- TextView txtWinner
+- Utility utility
+- ImageButton help
+- int[] arr
+- Stack<Integer> stackUndo
+- String thePlayer
+- String[] dbName
+- int index
+- CountDownTimer countDownTimer
+- int counter
+- long maxTime
+- boolean isRunning
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+- void resetCounter()
+# void onCreate(Bundle)
+- void myTimer()
+- void init()
++ void onClick(View)
++ void emptyMyStack()
++ boolean checkSolvable(int[])
+- void buttonColor44()
+- void buttonColor24()
+- void buttonColor33()
+- void setGameGrid(int)
+- void play(View)
+}
+class com.example.georgepromax.alarmSet {
+- TextView timetxt
+- Button selectTimeBtn
+- MaterialTimePicker picker
+- Calendar calendar
+- AlarmManager alarmManager
+- PendingIntent pendingIntent
+# void onCreate(Bundle)
++ void init()
+- void createNotificationChannel()
++ void onClick(View)
+- void cancelAlarm()
+- void setAlarm()
+- void showTimePicker()
+}
+class com.example.georgepromax.AlarmReceiver {
++ void onReceive(Context,Intent)
+}
+class com.example.georgepromax.MainActivity {
+- TextView txtTitle
+- Button play
+- int index
+- String thePlayer
+- String[] dbName
+- String[] dbPass
+- EditText txtUser
+- TextView txtValidUser
+- EditText txtPassword
+- TextView txtValidPassword
+- Button btnSend
+- Button btnRegister
+- Button btnMaster
+- CheckBox checkUser
+- ImageView imgLog
+- ImageView imgHello00
+- ImageView imgHello01
+- ImageView imgHello02
+- Random random
+- ImageButton imgBtnEye01
+- ImageButton imgBtnEye02
+- Validators valid
+- String[] welcome
+- int[] randomArr
+- int r
+- String test
+~ MediaPlayer mediaPlayer
+~ AudioManager audioManager
+# void onCreate(Bundle)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+- void init()
++ void onClick(View)
+}
+class com.example.georgepromax.AdapterItems {
+- Context context
+- List<ClassItem> objects
++ View getView(int,View,ViewGroup)
+}
+class com.example.georgepromax.Utility {
++ int index
++ int numberAB(String,char,char)
++ int[] randomArr(int,int)
++ char[] diffrentLetters(String)
++ int sharedLetters(String,String)
++ boolean loginCheck(String,String)
+}
+class com.example.georgepromax.RegistrationPage {
+- TextView txtTitleR
+- EditText txtUserR
+- TextView txtValidUserR
+- EditText txtPasswordR
+- TextView txtValidPasswordR
+- EditText txtEmailR
+- TextView txtValidEmailR
+- EditText txtPhoneR
+- TextView txtValidPhoneR
+- Button btnSendR
+- Validators valid
+# void onCreate(Bundle)
++ void init()
++ void onClick(View)
+}
+class com.example.georgepromax.Validators {
+- Context context
++ String checkUserName(String)
++ String checkPassword(String)
++ String checkEmail(String)
++ String checkPhone(String)
+}
+
+
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.navigation
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.navigation
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.UserViewData
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.UserViewData
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.fourInAline
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.fourInAline
+com.example.georgepromax.OnItemClickListener <|.. com.example.georgepromax.MasterP
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.MasterP
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.georgepromax.DataBaseHelper
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.WordGame
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.WordGame
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.game
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.game
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.alarmSet
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.alarmSet
+android.content.BroadcastReceiver <|-- com.example.georgepromax.AlarmReceiver
+com.example.georgepromax.OnClickListener <|.. com.example.georgepromax.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.MainActivity
+android.widget.ArrayAdapter <|-- com.example.georgepromax.AdapterItems
+android.view.View.OnClickListener <|.. com.example.georgepromax.RegistrationPage
+androidx.appcompat.app.AppCompatActivity <|-- com.example.georgepromax.RegistrationPage
+com.example.georgepromax.Utility <|-- com.example.georgepromax.Validators
+@enduml

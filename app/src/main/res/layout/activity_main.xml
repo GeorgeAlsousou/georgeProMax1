@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:layout_gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:textSize="48dp"
+        android:layout_gravity="center"
+        android:textColor="#484848"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login"
+        android:layout_gravity="center"
+        android:id="@+id/imgLog"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/imgHello00"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/hello00"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hello01"
+            android:layout_gravity="center"
+            android:id="@+id/imgHello01"
+            android:layout_marginLeft="50px"
+            android:visibility="gone"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hello02"
+            android:layout_gravity="center"
+            android:id="@+id/imgHello02"
+            android:layout_marginLeft="50px"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get last account"
+        android:textSize="18dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/checkUser"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter User Name"
+        android:textSize="28dp"
+        android:ems="10"
+        android:layout_gravity="center"
+        android:layout_marginTop="50px"
+        android:id="@+id/txtUser"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:id="@+id/txtValidUser"/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:orientation="horizontal">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:ems="10"
+        android:textSize="28dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="25dp"
+        android:id="@+id/txtPassword"
+        android:inputType="textPassword"/>
+
+    <ImageButton
+        android:id="@+id/imgBtnEye02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/eye02"
+        android:layout_marginRight="10dp"
+        android:onClick="onClick"
+        android:visibility="visible"/>
+    <ImageButton
+        android:id="@+id/imgBtnEye01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/eye01"
+        android:layout_marginRight="10dp"
+        android:onClick="onClick"
+        android:visibility="gone"/>
+</LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:id="@+id/txtValidPassword"/>
+
+    <!--<RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הראה סיסמה"
+        android:layout_gravity="center"
+        android:textSize="14dp"
+        android:id="@+id/rdShow"
+        android:checked="false"></RadioButton>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הסתר סיסמה"
+        android:layout_gravity="center"
+        android:textSize="14dp"
+        android:id="@+id/rdHide"
+        android:checked="true"></RadioButton>-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:textSize="28dp"
+            android:id="@+id/btnSend"
+            android:textStyle="bold"
+            android:backgroundTint="#484848"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_gravity="center"
+            android:text="Sign Up"
+            android:textStyle="bold"
+            android:textSize="28dp"
+            android:backgroundTint="#484848"
+            android:id="@+id/btnRegister"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/play"
+        android:text="Play"
+        android:layout_gravity="center"
+        android:layout_marginTop="75px"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:backgroundTint="#484848"
+        android:visibility="invisible"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mannager"
+        android:layout_gravity="center"
+        android:layout_marginTop="75px"
+        android:textSize="28dp"
+        android:id="@+id/btnMaster"
+        android:textStyle="bold"
+        android:backgroundTint="#484848"
+        android:visibility="invisible"
+        />
+
+
+
+</LinearLayout>

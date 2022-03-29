@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationPage"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:layout_gravity="center"
+        android:textSize="48dp"
+        android:textColor="#484848"
+        android:id="@+id/txtTitleR"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter User Name"
+        android:textSize="28dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50px"
+        android:ems="10"
+        android:id="@+id/txtUserR"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:id="@+id/txtValidUserR"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:textSize="28dp"
+        android:ems="10"
+        android:layout_gravity="center"
+        android:layout_marginTop="50px"
+        android:id="@+id/txtPasswordR"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:id="@+id/txtValidPasswordR"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:textSize="28dp"
+        android:ems="10"
+        android:layout_gravity="center"
+        android:layout_marginTop="50px"
+        android:id="@+id/txtEmailR"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:id="@+id/txtValidEmailR"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Phone"
+        android:textSize="28dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:layout_marginTop="50px"
+        android:id="@+id/txtPhoneR"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:id="@+id/txtValidPhoneR"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:layout_gravity="center"
+        android:textSize="28dp"
+        android:id="@+id/btnSendR"
+        android:textStyle="bold"
+        android:backgroundTint="#484848"/>
+</LinearLayout>

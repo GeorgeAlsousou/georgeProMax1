@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.georgepromax">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GeorgeProMax">
+        <activity
+            android:name=".gameTimeLeaderBoard"
+            android:exported="false" />
+        <activity
+            android:name=".alarmSet"
+            android:exported="false" />
+        <activity
+            android:name=".navigation"
+            android:exported="false" />
+        <activity
+            android:name=".fourInAline"
+            android:exported="false" />
+        <activity android:name=".WordGame" />
+        <activity android:name=".saveWinner" />
+        <activity android:name=".game" />
+        <activity android:name=".UserViewData" />
+        <activity android:name=".RegistrationPage" />
+        <activity android:name=".MasterP" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".AlarmReceiver" />
+    </application>
+
+</manifest>

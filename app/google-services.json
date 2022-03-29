@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "859054365859",
+    "firebase_url": "https://georgepromax-e66a3-default-rtdb.firebaseio.com",
+    "project_id": "georgepromax-e66a3",
+    "storage_bucket": "georgepromax-e66a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859054365859:android:cde6e97ab90a3a292a7316",
+        "android_client_info": {
+          "package_name": "com.example.georgepromax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859054365859-0vthfqpk0j74bc9d2t6f2q5phlmcpoc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC81wvyAUZwKVkpljhRmDSQ4UXF3p9fX7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859054365859-0vthfqpk0j74bc9d2t6f2q5phlmcpoc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
