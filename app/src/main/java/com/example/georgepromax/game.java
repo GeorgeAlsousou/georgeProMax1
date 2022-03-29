@@ -159,14 +159,14 @@ public class game extends AppCompatActivity implements View.OnClickListener {
         btnLeaderboard.setOnClickListener(this);
 
         arr = utility.randomArr(1, 15);
-        if(checkSolvable(arr)==false) {
-            while (!checkSolvable(arr)) {
-                arr = utility.randomArr(1, 15);
+        if(checkSolvable(arr)==false) { // בודקים אם הסידור מספרים פתיר
+            while (!checkSolvable(arr)) { // אם לא
+                arr = utility.randomArr(1, 15); // ניצור סידור חדש
             }
         }
 
         for (int j = 0; j < arr.length; j++) {
-            btnArr[j].setText("" + arr[j]);
+            btnArr[j].setText("" + arr[j]); // מכניסים מספרים לכפתורים
         }
 
 
