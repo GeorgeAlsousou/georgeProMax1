@@ -40,8 +40,6 @@ public class game extends AppCompatActivity implements View.OnClickListener {
     private PlayerModel playerModel=new PlayerModel(); // מודל השחקן
 
 
-    private noamsParameter = 0;
-
     private Button btnLeaderboard; // כפתור מעבר לטבלת השיאים
 
     private String[] dbName; // מערך שמות משתמשים מהמסד
