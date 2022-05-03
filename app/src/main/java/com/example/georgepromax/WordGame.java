@@ -8,11 +8,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Arrays;
 import java.util.Random;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class WordGame extends AppCompatActivity implements View.OnClickListener {
     private TextView wordGameTitle,lettersCount;
@@ -67,7 +67,6 @@ public class WordGame extends AppCompatActivity implements View.OnClickListener 
         btnArr[24]=findViewById(R.id.btn24);
         btnArr[25]=findViewById(R.id.btn25);
 
-
         wordGameTitle=findViewById(R.id.wordGameTitle);
         lettersCount=findViewById(R.id.lettersCount);
         txtUserWord=findViewById(R.id.txtUserWord);
@@ -75,7 +74,7 @@ public class WordGame extends AppCompatActivity implements View.OnClickListener 
         info=findViewById(R.id.info);
 
         Random random=new Random();
-        theWord=words[random.nextInt(5)];
+        theWord=words[random.nextInt(6)];
         sendWord.setOnClickListener(this);
         info.setOnClickListener(this);
 

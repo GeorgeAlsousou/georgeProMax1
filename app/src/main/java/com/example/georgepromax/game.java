@@ -159,14 +159,14 @@ public class game extends AppCompatActivity implements View.OnClickListener {
         btnLeaderboard.setOnClickListener(this);
 
         arr = utility.randomArr(1, 15);
-        if(checkSolvable(arr)==false) { // בודקים אם הסידור מספרים פתיר
-            while (!checkSolvable(arr)) { // אם לא
-                arr = utility.randomArr(1, 15); // ניצור סידור חדש
+        if(checkSolvable(arr)==false) {
+            while (!checkSolvable(arr)) { //כל עוד המספרים אינם פתירים, ניצור מספרים חדשים
+                arr = utility.randomArr(1, 15);
             }
         }
 
         for (int j = 0; j < arr.length; j++) {
-            btnArr[j].setText("" + arr[j]); // מכניסים מספרים לכפתורים
+            btnArr[j].setText("" + arr[j]);//הכנסת מספרים לכפתורים
         }
 
 
@@ -180,7 +180,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == help) {
+        if (view == help) { //איך לשחק
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("How to play");
             alertDialog.setIcon(R.drawable.help);
@@ -191,7 +191,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
             alertDialog.show();
         } else{
 
-            if(view==btnBest){
+            if(view==btnBest){/// השיא של השחקן
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                 alertDialog.setTitle("Personal Best");
                 alertDialog.setIcon(R.drawable.hello00);
@@ -204,15 +204,15 @@ public class game extends AppCompatActivity implements View.OnClickListener {
                 });
                 alertDialog.show();
             }
-            if(view==saveChanges){
+            if(view==saveChanges){ //לשמור שיא חדש במסד
                 save();
             }
-            if(view==btnLeaderboard){
+            if(view==btnLeaderboard){ //מעבר ללוח השחקנים
                 Intent intent=new Intent(this,gameTimeLeaderBoard.class);
                 startActivity(intent);
             }
 
-            play(view);
+            play(view); //מהלך
             myTimer();
 
 
@@ -230,37 +230,29 @@ public class game extends AppCompatActivity implements View.OnClickListener {
                         btnArr[10].getText().toString().equals("")) win = true;
 
                 buttonColor33();
-            } else if (btnArr[8].getVisibility() == View.GONE) { ///// 2*4
-                if (btnArr[0].getText().toString().equals("" + 1) &&
-                        btnArr[1].getText().toString().equals("" + 2) &&
-                        btnArr[2].getText().toString().equals("" + 3) &&
-                        btnArr[3].getText().toString().equals("" + 4) &&
-                        btnArr[4].getText().toString().equals("" + 5) &&
-                        btnArr[5].getText().toString().equals("" + 6) &&
-                        btnArr[6].getText().toString().equals("" + 7)) win = true;
-
+            } else if (btnArr[8].getVisibility() == View.GONE) {///// 2*4
+                for(int i=0;i<7;i++){
+                    if(btnArr[i].getText().toString().equals(""+(i+1)))
+                        win=true;
+                    else{
+                        win=false;
+                        i=7;
+                    }
+                }
                 buttonColor24();
             } else {
-                if (btnArr[0].getText().toString().equals("" + 1) &&
-                        btnArr[1].getText().toString().equals("" + 2) &&
-                        btnArr[2].getText().toString().equals("" + 3) &&
-                        btnArr[3].getText().toString().equals("" + 4) &&
-                        btnArr[4].getText().toString().equals("" + 5) &&
-                        btnArr[5].getText().toString().equals("" + 6) &&
-                        btnArr[6].getText().toString().equals("" + 7) &&
-                        btnArr[7].getText().toString().equals("" + 8) &&
-                        btnArr[8].getText().toString().equals("" + 9) &&
-                        btnArr[9].getText().toString().equals("" + 10) &&
-                        btnArr[10].getText().toString().equals("" + 11) &&
-                        btnArr[11].getText().toString().equals("" + 12) &&
-                        btnArr[12].getText().toString().equals("" + 13) &&
-                        btnArr[13].getText().toString().equals("" + 14) &&
-                        btnArr[14].getText().toString().equals("" + 15)) win = true;
-
+                for(int i=0;i<15;i++){
+                    if(btnArr[i].getText().toString().equals(""+(i+1)))
+                        win=true;
+                    else{
+                        win=false;
+                        i=15;
+                    }
+                }
                 buttonColor44();
             }
 
-            if(view==undo){
+            if(view==undo){ //חזור אחורה
                 if(!stackUndo.isEmpty()){
                     int a=stackUndo.pop();
                     int b=stackUndo.pop();
@@ -281,23 +273,26 @@ public class game extends AppCompatActivity implements View.OnClickListener {
                 alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(temporary.compareTo(gameTimeBest)<0){
+                        if(temporary.compareTo(gameTimeBest)<0){ //אם נקבע שיא חדש
                             playerModel.setGameTimeBest(temporary);
                             gameTimeBest=temporary;
                         }
                         if (btnArr[7].getVisibility() == View.GONE) { //// 3*3
+                            //////// משחק חדש
                             setGameGrid(1);
                             resetCounter();
                             buttonColor33();
                             emptyMyStack();
                         }
                         else if (btnArr[8].getVisibility() == View.GONE){//// 2*4
+                            /////// משחק חדש
                             setGameGrid(0);
                             resetCounter();
                             buttonColor24();
                             emptyMyStack();
                         }
-                        else {
+                        else { /// 4*4
+                            //////// משחק חדש
                             setGameGrid(2);
                             resetCounter();
                             buttonColor44();
@@ -308,14 +303,14 @@ public class game extends AppCompatActivity implements View.OnClickListener {
                 alertDialog.show();
             }
         }
-        if(view==GameTitle){ ////cheat
+        if(view==GameTitle){ ////cheat FOR TESTING
             for(int p=0;p<btnArr.length-1;p++)btnArr[p].setText(""+(p+1));
             btnArr[15].setText("15");
             btnArr[14].setText("");
         }
     }
 
-    private void save() {
+    private void save() { //// שמירה במסד
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("proMax/playerModel");
         dbName = new String[100];
@@ -338,12 +333,12 @@ public class game extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    public void emptyMyStack(){
+    public void emptyMyStack(){ // מרוקן את המחסנית
         while (!stackUndo.isEmpty())
             stackUndo.pop();
     }
 
-    public boolean checkSolvable(int[] arr){
+    public boolean checkSolvable(int[] arr){ /// אם כמות ההחלפות שיש לבצע הוא מספר זוגי אז המספרים פתירים
         boolean check=false;
         int count=0;
         for(int i=0;i<arr.length;i++){
@@ -358,7 +353,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    private void buttonColor44() {
+    private void buttonColor44() { // אם מספר במקום הנכון יש לצבוע בירוק
         for(int i=0; i<btnArr.length; i++){
             if(btnArr[i].getText().toString().equals(""+(i+1)))
                 btnArr[i].setTextColor(Color.GREEN);
@@ -367,24 +362,16 @@ public class game extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void buttonColor24() {
-        if(btnArr[0].getText().toString().equals(""+1))btnArr[0].setTextColor(Color.GREEN);
-        else btnArr[0].setTextColor(Color.WHITE);
-        if(btnArr[1].getText().toString().equals(""+2))btnArr[1].setTextColor(Color.GREEN);
-        else btnArr[1].setTextColor(Color.WHITE);
-        if(btnArr[2].getText().toString().equals(""+3))btnArr[2].setTextColor(Color.GREEN);
-        else btnArr[2].setTextColor(Color.WHITE);
-        if(btnArr[3].getText().toString().equals(""+4))btnArr[3].setTextColor(Color.GREEN);
-        else btnArr[3].setTextColor(Color.WHITE);
-        if(btnArr[4].getText().toString().equals(""+5))btnArr[4].setTextColor(Color.GREEN);
-        else btnArr[4].setTextColor(Color.WHITE);
-        if(btnArr[5].getText().toString().equals(""+6))btnArr[5].setTextColor(Color.GREEN);
-        else btnArr[5].setTextColor(Color.WHITE);
-        if(btnArr[6].getText().toString().equals(""+7))btnArr[6].setTextColor(Color.GREEN);
-        else btnArr[6].setTextColor(Color.WHITE);
+    private void buttonColor24() { // אם מספר במקום הנכון יש לצבוע בירוק
+        for(int i=0; i<7; i++){
+            if(btnArr[i].getText().toString().equals(""+(i+1)))
+                btnArr[i].setTextColor(Color.GREEN);
+            else
+                btnArr[i].setTextColor(Color.WHITE);
+        }
     }
 
-    private void buttonColor33() {
+    private void buttonColor33() { // אם מספר במקום הנכון יש לצבוע בירוק
         if(btnArr[0].getText().toString().equals(""+1))btnArr[0].setTextColor(Color.GREEN);
         else btnArr[0].setTextColor(Color.WHITE);
         if(btnArr[1].getText().toString().equals(""+2))btnArr[1].setTextColor(Color.GREEN);
@@ -403,8 +390,8 @@ public class game extends AppCompatActivity implements View.OnClickListener {
         else btnArr[9].setTextColor(Color.WHITE);
     }
 
-    private void setGameGrid(int i) {
-        if(i==0){
+    private void setGameGrid(int i) { // מצב משחק
+        if(i==0){ /// 2*4
             for(int j=0; j<btnArr.length; j++){
                 if(j<=7)
                     btnArr[j].setVisibility(View.VISIBLE);
@@ -425,7 +412,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
             btnArr[7].setText("");
         }
 
-        if(i==1){
+        if(i==1){ // 3*3
             for(int j=0; j<btnArr.length; j++){
                 if(j==3 || j==7 || j==11 || j>=12) {
                     btnArr[j].setVisibility(View.GONE);
@@ -452,7 +439,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
             btnArr[10].setText("");
         }
 
-        if(i==2){
+        if(i==2){ /// 4*4
             for(int j=0; j<btnArr.length; j++){
                 btnArr[j].setVisibility(View.VISIBLE);
             }
@@ -469,7 +456,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void play(View view) {
+    private void play(View view) { /// מהלך
         if(view==btnArr[0]){
             if(btnArr[1].getText().toString().equals("")){
                 btnArr[1].setText(btnArr[0].getText().toString());
