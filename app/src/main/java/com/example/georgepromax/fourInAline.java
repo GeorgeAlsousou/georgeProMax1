@@ -1,9 +1,5 @@
 package com.example.georgepromax;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class fourInAline extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView txtFourTitle;
-
-    private ImageView [] btn;
+    private TextView txtFourTitle; // כותרת הדף
+    private ImageView [] btn; // כפתורי המשחק
     private int turns=1; // 1 red // 2 blue
-
-    private ImageView [][] grid;
+    private ImageView [][] grid; // לוח המשחק
     private int [][] gridMone; //0 nothing // 1 red // 2 blue
 
     @Override
@@ -27,18 +24,18 @@ public class fourInAline extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four_in_aline);
 
-        init();
+        init(); /// תוכן
     }
 
     public void init(){
-        fvbid();
+        fvbid(); // הגדרת תכונות המחלקה
 
         for(int i=0;i<7;i++) {
             btn[i].setOnClickListener(this);
         }
     }
 
-    private void fvbid() {
+    private void fvbid() { // הגדרת תכונות המחלקה
         txtFourTitle=findViewById(R.id.txtFourTitle);
         btn=new ImageView[7];
         btn[0]=findViewById(R.id.gridBtn00);
@@ -106,13 +103,13 @@ public class fourInAline extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
-    public void onClick(View view) {
-        for(int i=0; i<7; i++){
+    public void onClick(View view) { // לחיצה על כפתור
+        for(int i=0; i<7; i++){ // מעבר על הלוח
             if(view==btn[i]){
-                if(gridMone[i][0]!=0){
+                if(gridMone[i][0]!=0){ // אם הטור מלא לא ניתן לעשות מהלך שם
                     Toast.makeText(this,"Invalid Move",Toast.LENGTH_SHORT).show();
                 }
-                else {
+                else { // הנחת הדיסקית במקום הנכון
                     for (int j = 5; j >= 0; j--) {
                         if (gridMone[i][j] == 0) {
                             if (turns == 1) {
@@ -131,10 +128,13 @@ public class fourInAline extends AppCompatActivity implements View.OnClickListen
                 }
             }
         }
-        checkWinner();
+        checkWinner(); // בדיקה אם השחקן ניצח
     }
 
     private void checkWinner() {
+        // מעבר על הלוח באמצעות לולאות ובדיקה אם יש 4 דיסקיות שמונחות בשורה
+        // אם יש אז תוצג הודעה המציינת את השחקן שניצח
+
         for(int i=0; i<7; i++){
             for(int j=0; j<3; j++){
                 if(gridMone[i][j]==1 && gridMone[i][j+1]==1 && gridMone[i][j+2]==1 && gridMone[i][j+3]==1) {
@@ -187,7 +187,7 @@ public class fourInAline extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    private void winMessage(int i) {
+    private void winMessage(int i) { // הודעה שמכילה את השחקן שניצח
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         if(i==1){
             alertDialog.setTitle("Red Wins!!!");
@@ -204,10 +204,10 @@ public class fourInAline extends AppCompatActivity implements View.OnClickListen
                 startActivity(getIntent());
             }
         });
-        alertDialog.setNegativeButton("Home", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("back", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent=new Intent(fourInAline.this,MainActivity.class);
+                Intent intent=new Intent(fourInAline.this,navigation.class);
                 startActivity(intent);
             }
         });
