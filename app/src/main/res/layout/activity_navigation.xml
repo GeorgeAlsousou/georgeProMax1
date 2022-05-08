@@ -22,12 +22,6 @@
             android:id="@+id/arrangeGameBtn"
             android:background="@drawable/arrgame_img"/>
 
-        <ImageButton
-            android:layout_marginTop="20dp"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:id="@+id/wordGameBtn"
-            android:background="@drawable/wordgame_img"/>
 
         <ImageButton
             android:layout_marginTop="20dp"

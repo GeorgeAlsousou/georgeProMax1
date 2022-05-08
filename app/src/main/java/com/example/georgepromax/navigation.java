@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class navigation extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton arrangeGameBtn,wordGameBtn,fourInLineBtn; // כפתורים
+    private ImageButton arrangeGameBtn,fourInLineBtn; // כפתורים
     private PlayerModel playerModel=new PlayerModel(); // מודל שחקן
 
     @Override
@@ -22,7 +22,6 @@ public class navigation extends AppCompatActivity implements View.OnClickListene
 
     public void init(){
         arrangeGameBtn=findViewById(R.id.arrangeGameBtn);
-        wordGameBtn=findViewById(R.id.wordGameBtn);
         fourInLineBtn=findViewById(R.id.fourInLineBtn);
 
         Intent intent=getIntent();// קבלת מידע מהדף הקודם
@@ -33,7 +32,6 @@ public class navigation extends AppCompatActivity implements View.OnClickListene
         playerModel.setGameTimeBest(intent.getStringExtra("gameTimeBest")); // שיא במשחק
 
         arrangeGameBtn.setOnClickListener(this); // לחיצה
-        wordGameBtn.setOnClickListener(this::onClick); // לחיצה
         fourInLineBtn.setOnClickListener(this::onClick); // לחיצה
     }
 
@@ -41,15 +39,6 @@ public class navigation extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         if(view==arrangeGameBtn){
             Intent intent=new Intent(this,game.class); // מעבר למשחק
-            intent.putExtra("userName",playerModel.getUserName()); // שליחת מידע על שחקן
-            intent.putExtra("password",playerModel.getPassword()); // שליחת מידע על שחקן
-            intent.putExtra("email",playerModel.getEmail()); // שליחת מידע על שחקן
-            intent.putExtra("phoneNumber",playerModel.getPhoneNumber()); // שליחת מידע על שחקן
-            intent.putExtra("gameTimeBest",playerModel.getGameTimeBest()); // שליחת מידע על שחקן
-            startActivity(intent);
-        }
-        if(view==wordGameBtn){
-            Intent intent=new Intent(this,WordGame.class); // מעבר למשחק
             intent.putExtra("userName",playerModel.getUserName()); // שליחת מידע על שחקן
             intent.putExtra("password",playerModel.getPassword()); // שליחת מידע על שחקן
             intent.putExtra("email",playerModel.getEmail()); // שליחת מידע על שחקן
