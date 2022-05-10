@@ -17,14 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class gameTimeLeaderBoard extends AppCompatActivity {
 
-//    private TextView txt;
-    private ListView listView;
-    private String[] dbName=new String[100];
-    private String[] dbTime=new String[100];
-    int index=0;
-    private LeaderboardItem leaderboardItem;
-    private ArrayList<LeaderboardItem> list;
-    private MyAdapter myAdapter;
+    private ListView listView; // הרשימה
+    private String[] dbName=new String[100]; // מערך שמות שחקנים
+    private String[] dbTime=new String[100]; // מערך זמני השקחנים
+    int index=0; // עזר
+    private LeaderboardItem leaderboardItem; // מאפייני שחקן ברשימה
+    private ArrayList<LeaderboardItem> list; // רשימה המכילה את הנתונים של השחקנים
+    private MyAdapter myAdapter; // התאמה בין הנתונים לרשימה על המסך
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,40 +36,39 @@ public class gameTimeLeaderBoard extends AppCompatActivity {
     private void init() {
         listView=findViewById(R.id.listLeaderboard);
         list=new ArrayList<>();
-//        txt=findViewById(R.id.txtLeaderboard);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("proMax/playerModel");
+        DatabaseReference myRef = database.getReference().child("proMax/playerModel"); // גישה לנתונים במסד
 
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 index=0;
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    dbName[index] = snapshot.child((ds.getKey())).child("userName").getValue().toString();
-                    dbTime[index] = snapshot.child((ds.getKey())).child("gameTimeBest").getValue().toString();
+                for (DataSnapshot ds : snapshot.getChildren()) { // מעבר על הרשימה
+                    dbName[index] = snapshot.child((ds.getKey())).child("userName").getValue().toString(); // קבלת שם משתמש
+                    dbTime[index] = snapshot.child((ds.getKey())).child("gameTimeBest").getValue().toString(); // קבלת זמן משחק
                     index = index + 1;
                 }
 
-                sortUp();
+                sortUp(); // סידור המערכים מהקטן לגדול
 
-                for(int i=0;i<index;i++){
+                for(int i=0;i<index;i++){ // הכנסת נתונים לרשימה
                     leaderboardItem = new LeaderboardItem();
-                    if(i==0)
+                    if(i==0) // מקום ראשון זהב
                         leaderboardItem.setImgItem(R.drawable.firsttime);
-                    else if(i==1)
+                    else if(i==1) // מקום שני כסף
                         leaderboardItem.setImgItem(R.drawable.secondtime);
-                    else if(i==2)
+                    else if(i==2) // מקום שלישי ארד
                         leaderboardItem.setImgItem(R.drawable.thirdtime);
                     else
-                    leaderboardItem.setImgItem(R.drawable.hello01);
+                    leaderboardItem.setImgItem(R.drawable.hello01); // לב
                     leaderboardItem.setName(dbName[i]);
                     leaderboardItem.setTime(dbTime[i]);
                     list.add(leaderboardItem);
                 }
 
-                makeMyList();
+                makeMyList(); // הצגת הרשימה
             }
 
             @Override
@@ -80,27 +78,13 @@ public class gameTimeLeaderBoard extends AppCompatActivity {
         });
     }
 
-    private void makeMyList() {
-        /*dbName[0]="hello";
-        dbTime[0]="99";
-        dbName[1]="drjj";
-        dbTime[1]="12";
-        LeaderboardItem test=new LeaderboardItem();
-        test.setName(dbName[0]);
-        test.setTime(dbTime[0]);
-        test.setImgItem(R.drawable.hello01);
-        list.add(test);
-        test=new LeaderboardItem();
-        test.setName(dbName[1]);
-        test.setTime(dbTime[1]);
-        test.setImgItem(R.drawable.hello01);
-        list.add(test);*/
-        myAdapter=new MyAdapter(this,0,0,list);
-        listView.setAdapter(myAdapter);
+    private void makeMyList() { // הצגת הרשימה
+        myAdapter=new MyAdapter(this,0,0,list); // התאמה בין נתונים למסך
+        listView.setAdapter(myAdapter); // הצגת הנתונים במסך
     }
 
 
-    public int minIndexArr(int[]arr){
+    public int minIndexArr(int[]arr){ // מחזיר מיקום של מספר הכי קטן במערך
         int imin=0;
         for(int i=1;i<arr.length;i++){
             if(arr[i] < arr[imin])
@@ -109,10 +93,10 @@ public class gameTimeLeaderBoard extends AppCompatActivity {
         return imin;
     }
 
-    public void sortUp(){
-        int[]ezerTi=new int[index];
-        String[]ezerTs=new String[index];
-        String[]ezerN=new String[index];
+    public void sortUp(){ // מיון המערכים
+        int[]ezerTi=new int[index]; // זמן במספרים
+        String[]ezerTs=new String[index]; // הזמן במחרוזות
+        String[]ezerN=new String[index]; // השמות
         int imin;
         for(int i=0; i<index; i++){
             ezerTs[i]=dbTime[i];
@@ -120,10 +104,10 @@ public class gameTimeLeaderBoard extends AppCompatActivity {
             ezerTi[i]=Integer.valueOf(ezerTs[i]);
         }
         for(int i=0;i<index;i++){
-            imin=minIndexArr(ezerTi);
+            imin=minIndexArr(ezerTi); // מיקום של מינימום
             dbTime[i]=ezerTs[imin];
             dbName[i]=ezerN[imin];
-            ezerTi[imin]=Integer.MAX_VALUE;
+            ezerTi[imin]=Integer.MAX_VALUE; // המינימום הופך למספר גדול כדי שנוכל לקבל את המינימום הבא
         }
     }
 }

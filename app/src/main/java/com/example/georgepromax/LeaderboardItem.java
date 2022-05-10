@@ -1,8 +1,8 @@
 package com.example.georgepromax;
 
 public class LeaderboardItem {
-    private String name,time;
-    private int imgItem;
+    private String name,time; // שם, זמן
+    private int imgItem; // תמונה שתוצג בצד השמות
 
     public LeaderboardItem() {}
 
