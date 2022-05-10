@@ -2,7 +2,6 @@ package com.example.georgepromax;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -29,6 +28,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private MusicService musicService;
+    private boolean checkMusic;
 
     private TextView txtTitle; // הכותרת של הדף
     private Button play; // כפתור שמעביר למסך הניווט
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int r; //משתנה למספר האקראי
     ////////////////////////////////////////
 
-    MediaPlayer mediaPlayer; //ניגון מוזיקת רקע
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +93,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if(itemId==R.id.musicChangeMode){ //שינוי מצב מוזיקה הפעל/הפסק
-            if(mediaPlayer.isPlaying())
-                mediaPlayer.stop();
-            else{
-                mediaPlayer=MediaPlayer.create(this,R.raw.music_for_game00);
-                mediaPlayer.setLooping(true);
-                mediaPlayer.setVolume(100,100);
-                mediaPlayer.start();
+            if(checkMusic) {
+                stopService(new Intent(this, MusicService.class));
+                checkMusic=false;
+            }
+            else {
+                startService(new Intent(this, MusicService.class));
+                checkMusic=true;
             }
         }
         if(itemId==R.id.alarm){ // מעבר לדף ההתראה
@@ -109,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init(){
+       startService(new Intent(this,MusicService.class));
+       checkMusic=true;
+
         random=new Random();
         welcome=new String[] {"Hello ", "Welcome ", "Ahoy ", "Howdy "}; //מילות ברכה
 
@@ -127,11 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgHello01=findViewById(R.id.imgHello01);
         imgHello02=findViewById(R.id.imgHello02);
         imgLog=findViewById(R.id.imgLog);
-        ///////////////////////////////////////////////////////////audio
-        mediaPlayer=MediaPlayer.create(this,R.raw.music_for_game00); //בחירת קובץ מוזיקה
-        mediaPlayer.setLooping(true); // מוזיקה בלופ
-        mediaPlayer.setVolume(100,100); //עוצמת המוזיקה
-        ///////////////////////////////////////////////////////////audio
+
         btnSend.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
         play.setOnClickListener(this::onClick);
