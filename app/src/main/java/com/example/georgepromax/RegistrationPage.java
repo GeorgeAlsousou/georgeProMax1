@@ -9,9 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RegistrationPage extends AppCompatActivity implements OnClickListener {
@@ -27,6 +31,7 @@ public class RegistrationPage extends AppCompatActivity implements OnClickListen
     private TextView txtValidPhoneR; // תקינות מספר טלפון
     private Button btnSendR; // כפתור שליחה
     private Validators valid=new Validators(this); // מחלקה שמכילה פעולות לבדיקת תקינות
+    private String []dbName;
 
 
     @Override
@@ -54,7 +59,26 @@ public class RegistrationPage extends AppCompatActivity implements OnClickListen
 
     @Override
     public void onClick(View view) {
-        txtValidUserR.setText(valid.checkUserNameR(txtUserR.getText().toString())); // תקינות
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("proMax/playerModel");
+        dbName = new String[100];
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int index=0;
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    dbName[index]=snapshot.child((ds.getKey())).child("userName").getValue().toString();
+
+                    index++;
+                }
+                txtValidUserR.setText(valid.checkUserNameR(txtUserR.getText().toString(),dbName)); // תקינות
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                return;
+            }
+        });
         txtValidPasswordR.setText(valid.checkPassword(txtPasswordR.getText().toString())); // תקינות
         txtValidEmailR.setText(valid.checkEmail(txtEmailR.getText().toString())); // תקינות
         txtValidPhoneR.setText(valid.checkPhone(txtPhoneR.getText().toString())); // תקינות
@@ -76,8 +100,8 @@ public class RegistrationPage extends AppCompatActivity implements OnClickListen
             dataBaseHelper.addOne(playerModel);*/
 
             // Write a message to the database
-            FirebaseDatabase database = FirebaseDatabase.getInstance(); // מסד הנתונים
-            DatabaseReference myRef = database.getReference().child("proMax/playerModel"); // מיקום שמירת המשתמש
+//            FirebaseDatabase database = FirebaseDatabase.getInstance(); // מסד הנתונים
+//            DatabaseReference myRef = database.getReference().child("proMax/playerModel"); // מיקום שמירת המשתמש
 
             PlayerModel player=new PlayerModel(); // יצירת מודל שחקן
             player.setUserName(txtUserR.getText().toString()); // הכנסת מידע שחקן

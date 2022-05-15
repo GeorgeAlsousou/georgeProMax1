@@ -3,18 +3,9 @@
 import android.content.Context;
 import android.util.Patterns;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import androidx.annotation.NonNull;
-
  public class Validators extends Utility{
 
     private Context context;
-    public String str="1";
 
     public Validators(){};
 
@@ -32,14 +23,14 @@ import androidx.annotation.NonNull;
                 return "";
     }
 
-     public String checkUserNameR(String userName){
+     public String checkUserNameR(String userName, String[]dbNames){
          if(userName.equals(""))
              return "Please Enter User Name";
          else
          if(userName.length()<4)
              return "Minimum 4 Characters";
          else{
-             FirebaseDatabase database = FirebaseDatabase.getInstance();
+             /*FirebaseDatabase database = FirebaseDatabase.getInstance();
              DatabaseReference myRef = database.getReference().child("proMax/playerModel");
              dbName = new String[100];
              myRef.addValueEventListener(new ValueEventListener() {
@@ -50,9 +41,8 @@ import androidx.annotation.NonNull;
                      for(DataSnapshot ds: snapshot.getChildren()){
                          dbName[index]=snapshot.child((ds.getKey())).child("userName").getValue().toString();
 
-                         //str=str+dbName[index];
 
-                         if(!userName.trim().equals(dbName[temp].trim()))
+                         if(!userName.equals(dbName[temp]))
                              temp++;
 
                          index++;
@@ -63,26 +53,13 @@ import androidx.annotation.NonNull;
                  public void onCancelled(@NonNull DatabaseError error) {
                      return;
                  }
-             });
-             /*myRef.addValueEventListener(new ValueEventListener() {
-                 @Override
-                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                     index=0;
-                     temp=0;
-                     for(DataSnapshot ds: snapshot.getChildren()){
-                         dbName[index]=snapshot.child((ds.getKey())).child("userName").getValue().toString();
-
-                         str=str+dbName[index];
-
-                         if(!userName.trim().equals(dbName[temp].trim()))
-                             temp++;
-
-                         index++;
-                     }
-                 }
-                 @Override
-                 public void onCancelled(@NonNull DatabaseError error) {}
              });*/
+
+             temp=0;
+             for(index=0; index<dbNames.length;index++){
+                 if(!userName.equals(dbNames[temp]))
+                     temp++;
+             }
              if(temp!=index)
                  return "User name already in use";
              else

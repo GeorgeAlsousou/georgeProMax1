@@ -5,8 +5,6 @@ import java.util.Random;
 public class Utility {
 
     public int index=0,temp=0; // משתנים שימושיים לפעולות
-    public String[] dbName; // מכיל את שמות המשתמשים ממסד הנתונים
-
 
     public int[] randomArr(int x, int y){ // מחזיר מערך חד ממדי המכיל את כל המספרים בין שני פרמטרים בסדר אקראי
         Random random=new Random(); // שמתנה אקראי

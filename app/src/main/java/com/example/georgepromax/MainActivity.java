@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         init(); //תוכן
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, MusicService.class));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
