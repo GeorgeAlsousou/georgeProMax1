@@ -4,35 +4,32 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class MusicService extends Service {
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer; // נגן המוזיקה
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(Intent intent) {//מקשרת בין האפליקציה לבין הסרביס
         return null;
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate() { //מה קורה כשיוצרים את האובייקט של סרביס
         mediaPlayer= MediaPlayer.create(this, R.raw.music_for_game00);
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this,"Background Music Started",Toast.LENGTH_SHORT).show();
+    public int onStartCommand(Intent intent, int flags, int startId) { // מה קורה כשמפעילים את הסרביס
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
-    public void onDestroy() {
-        Toast.makeText(this,"Background Music Stopped",Toast.LENGTH_SHORT).show();
+    public void onDestroy() { // מה קורה כשמכבים את הסרביס
         mediaPlayer.stop();
         super.onDestroy();
     }
