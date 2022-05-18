@@ -273,7 +273,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
                 alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(temporary.compareTo(gameTimeBest)<0){ //אם נקבע שיא חדש
+                        if(Integer.valueOf(temporary)<Integer.valueOf(gameTimeBest)){ //אם נקבע שיא חדש
                             playerModel.setGameTimeBest(temporary);
                             gameTimeBest=temporary;
                         }
