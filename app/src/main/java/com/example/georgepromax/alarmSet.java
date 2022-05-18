@@ -1,7 +1,5 @@
 package com.example.georgepromax;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -19,6 +17,8 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.Calendar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class alarmSet extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,6 +42,12 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
         selectTimeBtn=findViewById(R.id.selectTimeBtn);
         setAlarmBtn=findViewById(R.id.setAlarmBtn);
         cancelAlarmBtn=findViewById(R.id.cancelAlarmBtn);
+
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,8);
+        calendar.set(Calendar.MINUTE,30);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
 
         createNotificationChannel();
 
@@ -110,15 +116,15 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
                 String theTime;
                 if(picker.getHour()>12){
                     if(picker.getMinute()<10)
-                        theTime=String.format("%02d",(picker.getHour()-12))+" : "+"0"+String.format("%02d",picker.getMinute())+" PM";
+                        theTime=String.format("%02d",(picker.getHour()-12))+":"+"0"+String.format("%02d",picker.getMinute())+" PM";
                     else
-                        theTime=String.format("%02d",(picker.getHour()-12))+" : "+String.format("%02d",picker.getMinute())+" PM";
+                        theTime=String.format("%02d",(picker.getHour()-12))+":"+String.format("%02d",picker.getMinute())+" PM";
                 }
                 else {
                     if(picker.getMinute()<10)
-                        theTime=picker.getHour()+" : "+"0"+ picker.getMinute() + " AM";
+                        theTime=picker.getHour()+":"+"0"+ picker.getMinute() + " AM";
                     else
-                        theTime=picker.getHour()+" : " + picker.getMinute() + " AM";
+                        theTime=picker.getHour()+":" + picker.getMinute() + " AM";
                 }
 
                 selectTimeBtn.setText(theTime);
