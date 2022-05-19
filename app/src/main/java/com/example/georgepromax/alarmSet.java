@@ -22,19 +22,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class alarmSet extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView timetxt;
-    private Button selectTimeBtn,setAlarmBtn,cancelAlarmBtn;
-    private MaterialTimePicker picker;
-    private Calendar calendar;
-    private AlarmManager alarmManager;
-    private PendingIntent pendingIntent;
+    private TextView timetxt; // הזמן
+    private Button selectTimeBtn,setAlarmBtn,cancelAlarmBtn; // כפתורים
+    private MaterialTimePicker picker; // שעון
+    private Calendar calendar; // לוח שנה
+    private AlarmManager alarmManager; // מנהל ההתראות
+    private PendingIntent pendingIntent;//מעבר למסך הבית
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_set);
 
-        init();
+        init(); // תוכן
     }
 
     public void init(){
@@ -43,7 +43,7 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
         setAlarmBtn=findViewById(R.id.setAlarmBtn);
         cancelAlarmBtn=findViewById(R.id.cancelAlarmBtn);
 
-        calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance(); // ברירת מחדל ב8 וחצי בבוקר
         calendar.set(Calendar.HOUR_OF_DAY,8);
         calendar.set(Calendar.MINUTE,30);
         calendar.set(Calendar.SECOND,0);
@@ -56,8 +56,8 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
         cancelAlarmBtn.setOnClickListener(this::onClick);
     }
 
-    private void createNotificationChannel() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private void createNotificationChannel() { // יצירת ערוץ לשליחת ההתראה
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){ // אם גרסת אנדרויד היא 8.0 ומעלה
             CharSequence name = "georgeProMaxReminderChannel";
             String description = "Channel for alarm manager";
             int importance = NotificationManager.IMPORTANCE_HIGH;
@@ -72,17 +72,17 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if(view==selectTimeBtn){
-            showTimePicker();
+            showTimePicker(); // בחירת זמן
         }
         if(view==setAlarmBtn){
-            setAlarm();
+            setAlarm(); // הגדר התראה
         }
         if(view==cancelAlarmBtn){
-            cancelAlarm();
+            cancelAlarm(); // בטל התראה
         }
     }
 
-    private void cancelAlarm() {
+    private void cancelAlarm() { // מבטל את ההתראה
         Intent intent=new Intent(this,AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
         if(alarmManager == null){
@@ -92,7 +92,7 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
         Toast.makeText(this,"Alarm cancelled",Toast.LENGTH_SHORT).show();
     }
 
-    private void setAlarm() {
+    private void setAlarm() { // מפעיל את ההתראה לזמן שנבחר
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent=new Intent(this,AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
@@ -101,36 +101,37 @@ public class alarmSet extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void showTimePicker() {
-        picker = new MaterialTimePicker.Builder()
+        picker = new MaterialTimePicker.Builder() // יצירת שעון בחירה
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setHour(12)
                 .setMinute(0)
                 .setTitleText("Select Alarm Time")
                 .build();
 
-        picker.show(getSupportFragmentManager(),"georgeProMax");
+        picker.show(getSupportFragmentManager(),"georgeProMax"); // הצג את שעון הבחירה
 
-        picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+        picker.addOnPositiveButtonClickListener(new View.OnClickListener() { // כאשר בוחרים שעה
             @Override
             public void onClick(View v) {
                 String theTime;
-                if(picker.getHour()>12){
-                    if(picker.getMinute()<10)
-                        theTime=String.format("%02d",(picker.getHour()-12))+":"+"0"+String.format("%02d",picker.getMinute())+" PM";
+                if(picker.getHour()<10){ // אם השעות מספר חד ספרתי נוסיף אפס לפני
+                    if(picker.getMinute()<10) // אם הדקות מספר חד ספרתי נוסיף אפס לפני
+                        theTime="0"+picker.getHour()+":"+"0"+picker.getMinute();
                     else
-                        theTime=String.format("%02d",(picker.getHour()-12))+":"+String.format("%02d",picker.getMinute())+" PM";
+                        theTime="0"+picker.getHour()+":"+picker.getMinute();
                 }
                 else {
-                    if(picker.getMinute()<10)
-                        theTime=picker.getHour()+":"+"0"+ picker.getMinute() + " AM";
+                    if(picker.getMinute()<10) // אם הדקות מספר חד ספרתי נוסיף אפס לפני
+                        theTime=picker.getHour()+":"+"0"+ picker.getMinute();
                     else
-                        theTime=picker.getHour()+":" + picker.getMinute() + " AM";
+                        theTime=picker.getHour()+":"+picker.getMinute();
                 }
 
                 selectTimeBtn.setText(theTime);
                 timetxt.setText(theTime);
+                // נשנה את הזמן שכתוב
 
-                calendar = Calendar.getInstance();
+                calendar = Calendar.getInstance(); // נגדיר את לוח שנה עם הזמן שנבחר
                 calendar.set(Calendar.HOUR_OF_DAY,picker.getHour());
                 calendar.set(Calendar.MINUTE,picker.getMinute());
                 calendar.set(Calendar.SECOND,0);
