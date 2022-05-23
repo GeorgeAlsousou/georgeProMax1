@@ -101,7 +101,7 @@ public class game extends AppCompatActivity implements View.OnClickListener {
 
     private void myTimer() {
         if (!isRunning) { // אם הטיימר לא רץ
-            countDownTimer = new CountDownTimer(600000, 1000) { // יוצרים טיימר חדש
+            countDownTimer = new CountDownTimer(maxTime, 1000) { // יוצרים טיימר חדש
                 @Override
                 public void onTick(long l) { // כל ספירה
                     CountDown.setText("" + counter);
@@ -110,7 +110,36 @@ public class game extends AppCompatActivity implements View.OnClickListener {
 
                 @Override
                 public void onFinish() {
-                    CountDown.setText("Game Over");
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(game.this);
+                    alertDialog.setTitle("Game Over");
+                    alertDialog.setMessage("You reached the time limit");
+                    alertDialog.setNeutralButton("Play Again", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if (btnArr[7].getVisibility() == View.GONE) { //// 3*3
+                                //////// משחק חדש
+                                setGameGrid(1);
+                                resetCounter();
+                                buttonColor33();
+                                emptyMyStack();
+                            }
+                            else if (btnArr[8].getVisibility() == View.GONE){//// 2*4
+                                /////// משחק חדש
+                                setGameGrid(0);
+                                resetCounter();
+                                buttonColor24();
+                                emptyMyStack();
+                            }
+                            else { /// 4*4
+                                //////// משחק חדש
+                                setGameGrid(2);
+                                resetCounter();
+                                buttonColor44();
+                                emptyMyStack();
+                            }
+                        }
+                    });
+                    alertDialog.show();
                 } // הגבלת הזמן
             }.start();
             isRunning = true; // הטימר התחיל לרוץ

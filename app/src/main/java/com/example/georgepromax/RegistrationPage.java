@@ -31,7 +31,7 @@ public class RegistrationPage extends AppCompatActivity implements OnClickListen
     private TextView txtValidPhoneR; // תקינות מספר טלפון
     private Button btnSendR; // כפתור שליחה
     private Validators valid=new Validators(this); // מחלקה שמכילה פעולות לבדיקת תקינות
-    private String []dbName;
+    private String []dbName; // מערך שמות מהמסד
 
 
     @Override
@@ -79,6 +79,7 @@ public class RegistrationPage extends AppCompatActivity implements OnClickListen
                 return;
             }
         });
+
         txtValidPasswordR.setText(valid.checkPassword(txtPasswordR.getText().toString())); // תקינות
         txtValidEmailR.setText(valid.checkEmail(txtEmailR.getText().toString())); // תקינות
         txtValidPhoneR.setText(valid.checkPhone(txtPhoneR.getText().toString())); // תקינות

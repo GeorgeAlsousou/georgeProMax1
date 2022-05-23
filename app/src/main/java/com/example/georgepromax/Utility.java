@@ -32,7 +32,7 @@ public class Utility {
         return arr; // מחזיר את המערך
     }
 
-    public char[] diffrentLetters(String s){ // מחזיר מערך תוים שבו כל תו יופיע פעם אחת בלבד
+    /*public char[] diffrentLetters(String s){ // מחזיר מערך תוים שבו כל תו יופיע פעם אחת בלבד
         char[] arr=new char[s.length()]; // מערך תווים
         for(int i=0; i<s.length(); i++)
             arr[i]=s.charAt(i); // הכנסת התוים במילה למערך
@@ -62,9 +62,7 @@ public class Utility {
                     count++; // אות משותפת
         }
         return count; // פתרון
-    }
-
-
+    }*/
 
     /*public boolean loginCheck(String name, String pass){
         FirebaseDatabase database=FirebaseDatabase.getInstance();

@@ -29,7 +29,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private MusicService musicService;
     private boolean checkMusic;
 
     private TextView txtTitle; // הכותרת של הדף

@@ -204,13 +204,6 @@ public class fourInAline extends AppCompatActivity implements View.OnClickListen
                 startActivity(getIntent());
             }
         });
-        alertDialog.setNegativeButton("back", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent=new Intent(fourInAline.this,navigation.class);
-                startActivity(intent);
-            }
-        });
         alertDialog.show();
     }
 }
